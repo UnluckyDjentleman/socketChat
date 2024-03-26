@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chat</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    </head>
+    <body class="bg-secondary">
+        <header class="bg-dark">
+            <p id="user" name="user" style="color: white"><%=name%></p>
+        </header>
+        <main>
+            <div id="allMessages" style="height:450px; overflow-y: scroll;">
+                <div id="feedback" class="mb3"></div>
+            </div>
+            <form id="messArea" class="mb3">
+                <input type="textarea" name="message" id="message" class="form-control" placeholder="Enter message"/>
+                <input type="submit" class="btn btn-primary" value="Send"/>
+            </form>
+        </main>
+        <script>
+            let rand=Math.floor(Math.random()*100)
+            $(function(){
+                const alertColor=[]
+                function getRandomColor() {
+                    var letters = '0123456789ABCDEF';
+                    var color = '#';
+                    for (var i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                    }
+                    return color;
+                } 
+                let i=0;      
+                while(i<100){
+                    alertColor.push(getRandomColor());
+                    i++;
+                }
+
+                var socket=io();
+                var user=$("#user");
+                var form=$("#messArea");
+                var messageField=$("#allMessages");
+                var message=$("#message");
+                var feedback=$("#feedback");
+                
+                //submit message
+                form.submit((event)=>{
+                    event.preventDefault();
+                    socket.emit('send mess',{mess: message.val(), name: user.text(), color: alertColor[rand]});
+                })
+                //for gettting to know who types
+                message.bind("keypress",()=>{
+                    socket.emit('typing',{name:user.text()});
+                })
+                //socket add message
+                socket.on('add mess', data=>{
+                    feedback.html('');
+                    message.val('');
+                    messageField.append('<div class=\'card mb-3\' style=\'background-color:'+data.color+'; color:white\'>'+
+                        '<div class=\'card-header\'>'+
+                        '<h5>'+data.name+'</h5>'
+                        +'</div>'+
+                        '<div class=\'card-body\'>'+
+                        '<p>'+data.mess+'</p>'
+                        +'</div>'
+                        +'</div>');
+                })
+                socket.on('typing',(data)=>{
+                    var name=user.text();
+                    feedback.html('<p style="color:white;"><i>'+data.name+' is typing...</i></p>')
+                });
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "username": "Mia Fey",
+        "password": "1111"
+    },
+    {
+        "id": 2,
+        "username": "Maya Fey",
+        "password": "2222"
+    },
+    {
+        "id": 29,
+        "username": "Miles Edgeworth",
+        "password": "5555"
+    },
+    {
+        "id": 95,
+        "username": "Fransizka von Karma",
+        "password": "3333"
+    },
+    {
+        "id": 24,
+        "username": "Phoenix Wright",
+        "password": "4444"
+    },
+    {
+        "id": 87,
+        "username": "Apollo Justice",
+        "password": "6666"
+    },
+    {
+        "id": 16,
+        "username": "Diego Armando",
+        "password": "7777"
+    }
+]

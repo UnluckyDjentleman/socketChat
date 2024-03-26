@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Register</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body class="bg-secondary">
+        <div class="col-md-4 offset-md-4 bg-dark" style="margin-top: 20px; border-radius: 20px;">
+            <h1 style="text-align: center;">Socket Chat</h1>
+            <form class="form-horizontal" action="/register" method="POST">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username" placeholder="Name">
+                </div>
+                <div class="mb-3">
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="password"  placeholder="Password">
+                </div>
+                <div class="mb3">
+                    <button type="submit" class="btn btn-primary" style="width:100%">Register</button>
+                </div>
+            </form>
+            <div class="mb3">
+                <button type="submit" class="btn btn-link" style="width:100%" onclick="location.href='/login'">Login</button>
+            </div>
+        </div>
+        <script src="js/func.js"></script>
+    </body>
+</html>
