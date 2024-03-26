@@ -140,6 +140,13 @@ app.get('/chat/:id',(req,res)=>{
     }
     res.status(200).render(__dirname+'/static/chat.html',{name:req.payload.username});
 })
+app.get('/logout', async(req,res)=>{
+    res.clearCookie('accessToken');
+    res.clearCookie('refreshToken');
+    await clientRedis.set(req.cookies.refreshToken,'blocked');
+    res.redirect('/login')
+})
+
 
 connections = [];
 

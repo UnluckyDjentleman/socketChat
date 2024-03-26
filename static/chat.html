@@ -7,8 +7,9 @@
         <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     </head>
     <body class="bg-secondary">
-        <header class="bg-dark">
+        <header class="bg-dark d-flex align-self-center gap-3">
             <p id="user" name="user" style="color: white"><%=name%></p>
+            <input type="button" class="btn btn-danger" onclick="location.href='/logout'" value="Logout"/>
         </header>
         <main>
             <div id="allMessages" style="height:450px; overflow-y: scroll;">
